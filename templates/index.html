@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin: 20px;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        ul {
+            list-style: none;
+        }
+        li {
+            background: white;
+            margin: 10px auto;
+            padding: 10px;
+            width: 300px;
+            border-radius: 8px;
+        }
+        a {
+            color: red;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Smart Expense Tracker 💰</h1>
+
+    <h2>Total: ₹{{ total }}</h2>
+
+    <form method="POST" action="/add">
+        <input type="number" name="amount" placeholder="Enter amount" required>
+
+        <select name="category">
+            <option>Food</option>
+            <option>Travel</option>
+            <option>Shopping</option>
+            <option>Other</option>
+        </select>
+
+        <button type="submit">Add</button>
+    </form>
+
+    <h2>All Expenses:</h2>
+
+    <ul>
+        {% for expense in expenses %}
+            <li>
+                ₹{{ expense.amount }} - {{ expense.category }}
+                <a href="/delete/{{ loop.index0 }}">❌</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
